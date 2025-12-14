@@ -1,0 +1,143 @@
+"""class Persona:
+    def __init__(self, nombre, apellido, edad):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.edad = edad
+
+
+
+Persona1 = Persona("Jose", "Rojo", "24")
+
+print(f'Hola {Persona1.nombre}')
+
+from abc import ABC, abstractclassmethod
+
+import hashlib as hl
+
+
+Password = "123"
+ps_hl = hl.sha256(Password.encode()).hexdigest()
+
+
+I_pass = input("Ingrese la contraseña: ")
+val_con = hl.sha256(I_pass.encode()).hexdigest()
+
+
+if(val_con == ps_hl):
+    print("Conexión exitosa")
+else:
+    print("Contraseña incorrecta.")"""
+
+from abc import ABC, abstractclassmethod
+
+class Usuario(ABC):
+    def __init__(self, run, nombre, apellido, edad):
+        self.run = run
+        self.nombre = nombre
+        self.apellido = apellido
+        self.edad = edad
+
+
+class Cliente(Usuario):
+    def __init__(self, run, nombre, apellido, edad, codigo_cliente):
+        super().__init__(run, nombre, apellido, edad)
+        self.codigo_cliente = codigo_cliente
+
+
+class Empleado(Usuario):
+    def __init__(self, run, nombre, apellido, edad, codigo_empleado):
+        super().__init__(run, nombre, apellido, edad)
+        self.codigo_empledo = codigo_empleado
+
+Usuarios = []
+
+def Agregar_Usuario():
+
+    print("===MENÚ DE GESTIÓN==")
+    print("1.AGREGAR CLIENTE")
+    print("2.AGREGAR EMPLEADO")
+    print("3.SALIR")
+    opc = input("Ingrese la opcion que desea realizar: ")
+
+    
+    
+    
+
+    run = input('Ingrese el RUN del usuario: ')
+    nombre = input('Ingrese el nombre del usuario: ')
+    apellido = input('Ingrese el apellido del usuario: ')
+    edad = input(('Ingrese la edad del usuario:'))
+
+
+    if opc == "1":
+        cliente = input(('Ingrese el codigo del cliente: '))
+        cliente_n = Cliente(run, nombre, apellido, edad, cliente)
+        Usuarios.append(cliente_n)
+        print('Cliente agregado con éxito!')
+        
+    if opc == "2":
+        empleado = input(('Ingrese el codigo del empleado: '))
+        emp_n = Empleado(run, nombre, apellido, edad, empleado)
+        Usuarios.append(emp_n)
+        print('Empleado agregado con éxito')
+
+
+Agregar_Usuario()
+
+print('\n===LISTADO DE USUARIOS AGREGADOS===')
+
+
+for u in Usuarios:
+
+    if isinstance (u, Cliente):
+        print(f'Run: {u.run} | nombre: {u.nombre} | codigo cliente: {u.codigo_cliente}')
+    
+    if isinstance (u, Empleado):
+        print(f'Run: {u.run} | nombre: {u.nombre} | codigo empleado: {u.codigo_empledo}')
+
+def buscarUsuario(run):
+    for u in Usuarios:
+        if run == u.run:
+            print(f'===Detalles del Usuario===')
+            print(f'Nombre: {u.nombre}')
+            print(f'Apellido: {u.apellido}')
+            print(f'Edad: {u.edad}')
+            return u
+        else:
+            print('Usuario no encontrado')
+            return 
+
+
+def eliminarUsuario():
+    run = input('Ingrese el rut del usuario:')
+    UsuarioEliminar = buscarUsuario(run)
+
+    if UsuarioEliminar is None:
+        print(f'Usuario no encontrado')
+        return
+    
+
+    Usuarios.remove(UsuarioEliminar)
+
+    print('Usuario eliminado exitosamente')
+
+
+def editarUsuario():
+    run = input('Ingrese el rut del Usuario: ')
+    UsuarioEditar = buscarUsuario(run)
+
+    if UsuarioEditar is None:
+        print('Usuario no encontrado')
+        return
+    
+    
+    for u in Usuarios:
+        if isinstance (u, Cliente):
+            Cliente_nuevo = Cliente()
+            run_nuevo = input('Ingrese el nuevo rut: ')
+            Cliente_nuevo.run = run_nuevo
+                            
+
+
+
+
